@@ -1,0 +1,33 @@
+#include <iostream>
+#include <vector>
+using namespace std;
+bool possible(vector<int>& a,int m,int maxOR){
+    int parts=1;
+    int curOR=0;
+    for(int x:a){
+        if((curOR|x)>maxOR){
+            parts++;
+            curOR=x;
+        }
+    else curOR|=x;
+    }
+    return parts<=m;
+}
+int main(){
+    int n,m;
+    cin>>n>>m;
+    vector<int>a(n);
+    for(int i=0;i<n;i++)cin>>a[i];
+    int low=0,high=0;
+    for(int x:a)high|=x;
+    int ans=high;
+    while(low<=high){
+        int mid=(low+high)/2;
+        if(possible(a,m,mid)){
+            ans=mid;
+            high=mid-1;
+        }
+    else low=mid+1;
+    }
+    cout<<ans;
+}
