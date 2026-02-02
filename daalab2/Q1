@@ -1,0 +1,26 @@
+#include <iostream>
+#include <algorithm>
+using namespace std;
+int main(){
+    int n=6;
+    int s[6]={1,3,0,5,8,5};
+    int f[6]={2,4,6,7,9,9};
+    for(int i=0;i<n-1;i++)
+        for(int j=i+1;j<n;j++)
+            if(f[i]>f[j]){
+                swap(f[i],f[j]);
+                swap(s[i],s[j]);
+            }
+    int count=1;
+    cout<<"Selected activities: ("<<s[0]<<", "<<f[0]<<")";
+    int last=f[0];
+    for(int i=1;i<n;i++){
+        if(s[i]>=last){
+            cout<<", ("<<s[i]<<", "<<f[i]<<")";
+            last=f[i];
+            count++;
+        }
+    }
+    cout<<endl<<"Maximum number of activities = "<<count;
+    return 0;
+}
